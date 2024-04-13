@@ -39,5 +39,11 @@
             <p class="mt-3 text-muted">©2024 Login. All rights reserved | Design by Advik</p>
         </div>
     </div>
+    <script>
+        document.getElementById('signup-btn').addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent the default action (e.g., form submission or anchor navigation)
+            window.location.href = '@Url.Action("Signup", "Home")'; // Redirect to signup page
+        });
+    </script>
 </body>
 </html>

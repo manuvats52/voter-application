@@ -27,6 +27,14 @@ namespace voter_application.Controllers
         {
             return View();
         }
+        public IActionResult Signup()
+        {
+            return View("signup_page");
+        }
+        public IActionResult CancelSignup()
+        {
+            return RedirectToAction("Login"); 
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

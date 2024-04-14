@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using voter_application.Models;
-using voter_application.Data; // Import your DbContext namespace
+using Microsoft.Extensions.Logging;
 using System.Diagnostics;
-using voter_application.Views.Home;
+using voter_application.Data;
+using voter_application.Models;
 
 namespace voter_application.Controllers
 {
@@ -27,6 +27,31 @@ namespace voter_application.Controllers
             return View("login_page");
         }
 
+        [HttpPost]
+        public IActionResult Login(string emailOrMobile, string password)
+        {
+            // Retrieve user from the database based on email/mobile
+            var user = _dbContext.Users.FirstOrDefault(u => u.EmailOrMobile == emailOrMobile);
+
+            // Check if user exists and password matches
+            if (user != null && VerifyPassword(password, user.Password))
+            {
+                // Authentication successful, redirect user to dashboard or home page
+                return RedirectToAction("Index", "Home");
+            }
+
+            // Authentication failed, return to login page with error message
+            TempData["LoginErrorMessage"] = "Invalid email/mobile or password";
+            return RedirectToAction("Login");
+        }
+
+        private bool VerifyPassword(string enteredPassword, string storedPasswordHash)
+        {
+            // Implement your password verification logic here, e.g., using hashing algorithms like bcrypt
+            // For demonstration purposes, we'll just compare plaintext passwords
+            return enteredPassword == storedPasswordHash;
+        }
+
         public IActionResult Privacy()
         {
             return View();
@@ -36,7 +61,6 @@ namespace voter_application.Controllers
         {
             return View("signup_page");
         }
-
 
         [HttpPost]
         public IActionResult SignUp(users model)

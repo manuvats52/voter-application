@@ -1,0 +1,70 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    display: flex; /* Added for vertical centering */
+    justify-content: center; /* Added for vertical centering */
+    align-items: center; /* Added for vertical centering */
+    min-height: 100vh; /* Added for vertical centering */
+}
+
+.card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    width: 220px; /* Adjusted width for better layout */
+    padding: 10px; /* Increased padding for better spacing */
+    margin: 0 auto; /* Maintains horizontal centering */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.info {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.info-label {
+    width: 30%;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: inline; /* Display inline to ensure inline layout */
+}
+
+.info-value {
+    width: 70%; /* Adjusted width for better layout */
+    display: inline; /* Display inline to ensure inline layout */
+}
+
+.buttons {
+    text-align: center;
+}
+
+.button {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+    .button.print {
+        background-color: white; /* Change print button color to white */
+        color: black; /* Change text color of print button to green */
+    }
+
+        .button.print:hover {
+            background-color: green; /* Change background color of print button on hover to green */
+            color: white; /* Change text color of print button on hover to white */
+        }
+
+    .button.cancel {
+        background-color: white; /* Change cancel button color to red */
+        color: black; /* Change text color of cancel button to white */
+    }
+
+        .button.cancel:hover {
+            background-color: red; /* Change background color of cancel button on hover to darker red */
+        }

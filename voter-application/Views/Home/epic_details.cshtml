@@ -1,0 +1,51 @@
+﻿@page
+@model voter_application.Views.Home.epic_detailsModel
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EPIC Details</title>
+    <link rel="stylesheet" href="/css/epic_details.css">
+</head>
+<body>
+    <div class="card">
+        <div class="title">EPIC Details</div>
+        <div class="info">
+            <div class="info-label">EPIC Number:</div>
+            <div class="info-value">1234567890 </div>
+        </div>
+        <div class="info">
+            <div class="info-label">Name:</div>
+            <div class="info-value">Manu Sharma</div>
+        </div>
+        <div class="info">
+            <div class="info-label">Father's Name:</div>
+            <div class="info-value">N.C Sharma</div>
+        </div>
+        <div class="info">
+            <div class="info-label">Age:</div>
+            <div class="info-value">26</div>
+        </div>
+        <div class="info">
+            <div class="info-label">Gender:</div>
+            <div class="info-value">Male</div>
+        </div>
+        <div class="buttons">
+            <button class="button print">Print</button>
+            <button class="button cancel">Cancel</button>
+        </div>
+    </div>
+    <script>
+        // jQuery code to handle click event of the cancel button
+        $(document).ready(function () {
+            $('#cancelButton').click(function () {
+                // Redirect to search_voter.cshtml
+                window.location.href = '@Url.Action("search_voter", "home")';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,4 +1,3 @@
-
 using Microsoft.EntityFrameworkCore;
 using System;
 using voter_application.Data;

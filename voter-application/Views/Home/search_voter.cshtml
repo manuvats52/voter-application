@@ -18,12 +18,11 @@
     </div>
     <div class="container">
         <h1>Search Voter ID</h1>
-        <form action="#">
+        <form asp-action="SearchVoter" method="get">
             <div class="form-group">
                 <label for="state">State</label>
-                <select id="state" name="state">
+                <select id="state" name="state" asp-items="ViewBag.States">
                     <option value="">Select State</option>
-                    <option value="Uttar Pradesh">Uttar Pradesh</option>
                 </select>
             </div>
             <div class="form-group">
@@ -33,9 +32,9 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="constituency">Assembly Constituency</label>
+                <label for="constituency">Constituency</label>
                 <select id="constituency" name="assembly">
-                    <option value="">Select Assembly Constituency</option>
+                    <option value="">Select Constituency</option>
                 </select>
             </div>
             <div class="form-group">
@@ -48,11 +47,52 @@
             </div>
         </form>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        $(document).ready(function () {
             var cancelButton = document.querySelector(".cancel");
             cancelButton.addEventListener("click", function () {
                 document.querySelector("form").reset();
+            });
+
+            $('#state').change(function () {
+                var stateId = $(this).val();
+                if (stateId) {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/Home/GetCities?stateId=' + stateId,
+                        success: function (cities) {
+                            $('#city').empty();
+                            $('#city').append($('<option>').val('').text('Select City'));
+                            $.each(cities, function (i, city) {
+                                $('#city').append($('<option>').val(city.value).text(city.text));
+                            });
+                        }
+                    });
+                } else {
+                    $('#city').empty();
+                    $('#city').append($('<option>').val('').text('Select City'));
+                }
+            });
+
+            $('#city').change(function () {
+                var cityId = $(this).val();
+                if (cityId) {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/Home/GetConstituencies?cityId=' + cityId,
+                        success: function (constituencies) {
+                            $('#constituency').empty();
+                            $('#constituency').append($('<option>').val('').text('Select Assembly Constituency'));
+                            $.each(constituencies, function (i, constituency) {
+                                $('#constituency').append($('<option>').val(constituency.value).text(constituency.text));
+                            });
+                        }
+                    });
+                } else {
+                    $('#constituency').empty();
+                    $('#constituency').append($('<option>').val('').text('Select Assembly Constituency'));
+                }
             });
         });
     </script>

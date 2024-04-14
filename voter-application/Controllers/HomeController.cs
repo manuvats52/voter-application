@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using voter_application.Data;
@@ -65,10 +66,6 @@ namespace voter_application.Controllers
         {
             return View("signup_page");
         }
-        public IActionResult SearchVoter()
-        {
-            return View("search_voter");
-        }
 
         [HttpPost]
         public IActionResult SignUp(users model)
@@ -91,6 +88,32 @@ namespace voter_application.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        public IActionResult SearchVoter()
+        {
+            // Fetch states
+            var states = _dbContext.States.ToList();
+            ViewBag.States = new SelectList(states, "Id", "Name");
+
+            // Initialize empty lists for cities and constituencies
+            ViewBag.Cities = new SelectList(new List<City>(), "Id", "Name");
+            ViewBag.Constituencies = new SelectList(new List<Constituency>(), "Id", "Name");
+
+            return View("search_voter");
+        }
+
+        [HttpGet]
+        public IActionResult GetCities(int stateId)
+        {
+            var cities = _dbContext.Cities.Where(c => c.StateId == stateId).ToList();
+            return Json(new SelectList(cities, "Id", "Name"));
+        }
+
+        [HttpGet]
+        public IActionResult GetConstituencies(int cityId)
+        {
+            var constituencies = _dbContext.Constituencies.Where(con => con.CityId == cityId).ToList();
+            return Json(new SelectList(constituencies, "Id", "Name"));
         }
     }
 }

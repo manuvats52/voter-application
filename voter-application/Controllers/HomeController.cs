@@ -37,7 +37,7 @@ namespace voter_application.Controllers
             if (user != null && VerifyPassword(password, user.Password))
             {
                 // Authentication successful, redirect user to dashboard or home page
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("SearchVoter", "Home");
             }
 
             // Authentication failed, return to login page with error message
@@ -51,6 +51,10 @@ namespace voter_application.Controllers
             // For demonstration purposes, we'll just compare plaintext passwords
             return enteredPassword == storedPasswordHash;
         }
+        public IActionResult ForgotPassword()
+        {
+            return View("forgot_page");
+        }
 
         public IActionResult Privacy()
         {
@@ -60,6 +64,10 @@ namespace voter_application.Controllers
         public IActionResult Signup()
         {
             return View("signup_page");
+        }
+        public IActionResult SearchVoter()
+        {
+            return View("search_voter");
         }
 
         [HttpPost]

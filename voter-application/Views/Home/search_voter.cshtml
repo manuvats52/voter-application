@@ -1,0 +1,60 @@
+﻿@page
+@model voter_application.Views.Home.search_voterModel
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Voter</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/search_voter.css">
+</head>
+<body>
+    <div class="company-logo">
+        <img src="../images/logo_redfox.png" alt="Company Logo">
+        <!-- <div class="company-name">Advik Pos Services</div> -->
+    </div>
+    <div class="container">
+        <h1>Search Voter ID</h1>
+        <form action="#">
+            <div class="form-group">
+                <label for="state">State</label>
+                <select id="state" name="state">
+                    <option value="">Select State</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="city">City</label>
+                <select id="city" name="city">
+                    <option value="">Select City</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="constituency">Assembly Constituency</label>
+                <select id="constituency" name="assembly">
+                    <option value="">Select Assembly Constituency</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="epic">Epic Number or Name</label>
+                <input type="text" id="epic" name="epic" placeholder="Enter Epic Number or Name">
+            </div>
+            <div class="button-container">
+                <button type="submit">Search</button>
+                <button class="cancel" type="button">Cancel</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var cancelButton = document.querySelector(".cancel");
+            cancelButton.addEventListener("click", function () {
+                document.querySelector("form").reset();
+            });
+        });
+    </script>
+</body>
+</html>
